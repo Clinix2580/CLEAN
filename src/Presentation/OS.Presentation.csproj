@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>$(ProductName)</AssemblyName>
+    <RootNamespace>OS.Presentation</RootNamespace>
+    <Nullable>enable</Nullable>
+    
+    <!-- Application Name per Configuration -->
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_MX_Demo_ES'">ClinicOS_MX_Demo</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_MX_Admin_ES'">ClinicOS_MX_Admin</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_MX_Full_ES'">ClinicOS_MX_Full</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_USA_Demo_EN'">ClinicOS_USA_Demo</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_USA_Admin_EN'">ClinicOS_USA_Admin</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_USA_Full_EN'">ClinicOS_USA_Full</ProductName>
+    <AssemblyName Condition="'$(Configuration)' == 'ClinicOS_MX_Demo_ES'">ClinicOS_MX_Demo</AssemblyName>
+    <AssemblyName Condition="'$(Configuration)' == 'ClinicOS_MX_Admin_ES'">ClinicOS_MX_Admin</AssemblyName>
+    <AssemblyName Condition="'$(Configuration)' == 'ClinicOS_MX_Full_ES'">ClinicOS_MX_Full</AssemblyName>
+    <AssemblyName Condition="'$(Configuration)' == 'ClinicOS_USA_Demo_EN'">ClinicOS_USA_Demo</AssemblyName>
+    <AssemblyName Condition="'$(Configuration)' == 'ClinicOS_USA_Admin_EN'">ClinicOS_USA_Admin</AssemblyName>
+    <AssemblyName Condition="'$(Configuration)' == 'ClinicOS_USA_Full_EN'">ClinicOS_USA_Full</AssemblyName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_Full_ES'">ClinicOS</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_Demo_ES'">ClinicOS_Demo</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_Full_EN'">ClinicOS</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'ClinicOS_Demo_EN'">ClinicOS_Demo</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'CommerceOS_Full_ES'">CommerceOS</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'CommerceOS_Demo_ES'">CommerceOS_Demo</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'CommerceOS_Full_EN'">CommerceOS</ProductName>
+    <ProductName Condition="'$(Configuration)' == 'CommerceOS_Demo_EN'">CommerceOS_Demo</ProductName>
+    
+    <ApplicationManifest>app.manifest.xml</ApplicationManifest>
+    <StartupObject>OS.Presentation.App</StartupObject>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\OS.Infrastructure.csproj" />
+    <ProjectReference Include="..\Core\Application\OS.Application.csproj" />
+    <ProjectReference Include="..\Core\Domain\OS.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- WPF UI (Fluent Design) -->
+    <PackageReference Include="WPF-UI" Version="3.0.4" />
+    <PackageReference Include="WPF-UI.Tray" Version="3.0.4" />
+        
+    <!-- Lottie Animations -->
+    <PackageReference Include="LottieSharp" Version="2.4.0" />
+    <PackageReference Include="SkiaSharp" Version="2.88.8" />
+    <PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.8" />
+    
+    <!-- MVVM -->
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    
+    <!-- Theme Management -->
+    <PackageReference Include="ThemeManager" Version="11.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="..\..\assets\**\*" Link="assets\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="..\..\assets\demo_data\*.json" Link="assets\demo_data\%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\certificates\SoftwareOS_Compliance.cer" Condition="Exists('..\..\certificates\SoftwareOS_Compliance.cer')" Link="certificates\SoftwareOS_Compliance.cer" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

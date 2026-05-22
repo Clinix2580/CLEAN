@@ -1,0 +1,53 @@
+<Window x:Class="OS.Presentation.UI.Views.SplashWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="SoftwareOS" 
+        Height="450" Width="650"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    
+    <Border Background="#1a1a2e" CornerRadius="12">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Logo/Icon -->
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+                <ui:SymbolIcon Symbol="ShieldTask24" FontSize="64" Foreground="#4a9eff"/>
+                <TextBlock Text="SoftwareOS" 
+                          FontSize="32" 
+                          FontWeight="Bold" 
+                          Foreground="White"
+                          HorizontalAlignment="Center"
+                          Margin="0,20,0,0"/>
+                <TextBlock x:Name="VersionText"
+                          FontSize="14" 
+                          Foreground="#888888"
+                          HorizontalAlignment="Center"
+                          Margin="0,5,0,0"/>
+            </StackPanel>
+            
+            <!-- Loading -->
+            <StackPanel Grid.Row="2" Margin="0,30,0,0">
+                <ui:ProgressRing IsIndeterminate="True" 
+                                Width="40" 
+                                Height="40"
+                                Foreground="#4a9eff"/>
+                <TextBlock x:Name="StatusText"
+                          Text="Inicializando sistema..."
+                          FontSize="14" 
+                          Foreground="#888888"
+                          HorizontalAlignment="Center"
+                          Margin="0,15,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

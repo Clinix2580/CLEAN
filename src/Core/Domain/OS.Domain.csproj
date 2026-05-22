@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <AssemblyName>OS.Domain</AssemblyName>
+    <RootNamespace>OS.Domain</RootNamespace>
+    <IsAotCompatible>true</IsAotCompatible>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <Nullable>enable</Nullable>
+    <NoWarn>IL2026;IL3050</NoWarn>
+  </PropertyGroup>
+</Project>

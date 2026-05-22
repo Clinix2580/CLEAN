@@ -1,0 +1,9 @@
+  OS.Domain -> c:\Users\clini\Desktop\ClinicOS_Clean\src\Core\Domain\bin\Debug\net8.0\OS.Domain.dll
+  OS.Application -> c:\Users\clini\Desktop\ClinicOS_Clean\src\Core\Application\bin\Debug\net8.0\OS.Application.dll
+  OS.Infrastructure -> c:\Users\clini\Desktop\ClinicOS_Clean\src\Infrastructure\bin\Debug\net8.0\OS.Infrastructure.dll
+
+Compilación correcta.
+    0 Advertencia(s)
+    0 Errores
+
+Tiempo transcurrido 00:00:05.59

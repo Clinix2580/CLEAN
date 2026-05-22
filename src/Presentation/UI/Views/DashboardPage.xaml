@@ -1,0 +1,80 @@
+<Page x:Class="OS.Presentation.UI.Views.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      Title="Dashboard">
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <TextBlock x:Name="HeaderText"
+                  Text="Dashboard" 
+                  FontSize="28" 
+                  FontWeight="Bold"
+                  Margin="0,0,0,20"/>
+        
+        <!-- Stats Cards -->
+        <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,20">
+            <ui:Card Margin="5" Padding="20">
+                <StackPanel>
+                    <TextBlock x:Name="Stat1Label" Text="Total" FontSize="12" Opacity="0.7"/>
+                    <TextBlock x:Name="Stat1Value" Text="0" FontSize="32" FontWeight="Bold"/>
+                </StackPanel>
+            </ui:Card>
+            <ui:Card Margin="5" Padding="20">
+                <StackPanel>
+                    <TextBlock x:Name="Stat2Label" Text="Today" FontSize="12" Opacity="0.7"/>
+                    <TextBlock x:Name="Stat2Value" Text="0" FontSize="32" FontWeight="Bold"/>
+                </StackPanel>
+            </ui:Card>
+            <ui:Card Margin="5" Padding="20">
+                <StackPanel>
+                    <TextBlock x:Name="Stat3Label" Text="Pending" FontSize="12" Opacity="0.7"/>
+                    <TextBlock x:Name="Stat3Value" Text="0" FontSize="32" FontWeight="Bold"/>
+                </StackPanel>
+            </ui:Card>
+            <ui:Card Margin="5" Padding="20">
+                <StackPanel>
+                    <TextBlock x:Name="Stat4Label" Text="Alerts" FontSize="12" Opacity="0.7"/>
+                    <TextBlock x:Name="Stat4Value" Text="0" FontSize="32" FontWeight="Bold" Foreground="#ff6b6b"/>
+                </StackPanel>
+            </ui:Card>
+        </UniformGrid>
+        
+        <!-- Recent Activity -->
+        <ui:Card Grid.Row="2" Margin="0,10,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock x:Name="RecentActivityHeader" 
+                          Text="Recent Activity" 
+                          FontSize="18" 
+                          FontWeight="SemiBold"
+                          Margin="0,0,0,10"/>
+                
+                <DataGrid x:Name="RecentDataGrid" 
+                         Grid.Row="1"
+                         AutoGenerateColumns="False"
+                         IsReadOnly="True"
+                         GridLinesVisibility="None"
+                         Background="Transparent"
+                         BorderThickness="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="ColDate" Header="Date" Binding="{Binding Date}" Width="150"/>
+                        <DataGridTextColumn x:Name="ColType" Header="Type" Binding="{Binding Type}" Width="150"/>
+                        <DataGridTextColumn x:Name="ColDescription" Header="Description" Binding="{Binding Description}" Width="*"/>
+                        <DataGridTextColumn x:Name="ColStatus" Header="Status" Binding="{Binding Status}" Width="100"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </ui:Card>
+    </Grid>
+</Page>

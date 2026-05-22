@@ -1,0 +1,44 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore Nuevo_Sistema.sln
+    
+    - name: Build solution
+      run: dotnet build Nuevo_Sistema.sln --configuration Release --no-restore
+    
+    - name: Build solution (Debug with warnings as errors)
+      run: dotnet build Nuevo_Sistema.sln --configuration Debug --no-restore --warnaserror
+    
+    - name: Run tests (if available)
+      run: dotnet test tests/**/*.csproj --configuration Release --no-build --verbosity normal
+      continue-on-error: true
+    
+    - name: Check for compilation warnings
+      shell: powershell
+      run: |
+        $buildOutput = dotnet build Nuevo_Sistema.sln --configuration Debug --no-restore 2>&1
+        $hasWarnings = $buildOutput -match "warning"
+        if ($hasWarnings) {
+          Write-Error "Build completed with warnings. For ISO audit compliance, builds must have zero warnings."
+          exit 1
+        }
+        Write-Host "Build completed successfully with zero warnings."

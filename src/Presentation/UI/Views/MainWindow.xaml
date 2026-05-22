@@ -1,0 +1,53 @@
+﻿<ui:FluentWindow x:Class="OS.Presentation.UI.Views.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 Title="SoftwareOS" 
+                 Height="800" Width="1200"
+                 WindowStartupLocation="CenterScreen"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="Mica">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <ui:TitleBar x:Name="TitleBar" Title="SoftwareOS"/>
+            <Border x:Name="ReadOnlyBanner"
+                    Visibility="Collapsed"
+                    Background="#7C2D12"
+                    Padding="12,8">
+                <TextBlock x:Name="ReadOnlyBannerText"
+                           Text="Modo Solo Lectura Activo por Expiración"
+                           Foreground="White"
+                           FontWeight="SemiBold"
+                           TextWrapping="Wrap"/>
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <ui:NavigationView x:Name="NavigationView" 
+                               PaneDisplayMode="Left"
+                               IsPaneToggleVisible="True"
+                               OpenPaneLength="250">
+                <ui:NavigationView.MenuItems>
+                    <ui:NavigationViewItem Content="Dashboard" Tag="Dashboard" Icon="Home24"/>
+                    <ui:NavigationViewItem Content="Pacientes" Tag="Patients" Icon="People24"/>
+                    <ui:NavigationViewItem Content="Citas" Tag="Appointments" Icon="Calendar24"/>
+                    <ui:NavigationViewItem Content="Expedientes" Tag="MedicalRecords" Icon="Document24"/>
+                    <ui:NavigationViewItem Content="Reportes" Tag="Reports" Icon="Chart24"/>
+                </ui:NavigationView.MenuItems>
+
+                <ui:NavigationView.FooterMenuItems>
+                    <ui:NavigationViewItem Content="Configuración" Tag="Settings" Icon="Settings24"/>
+                    <ui:NavigationViewItem Content="Cerrar Sesión" Tag="Logout" Icon="ArrowExit24"/>
+                </ui:NavigationView.FooterMenuItems>
+            </ui:NavigationView>
+
+            <Frame x:Name="ContentFrame" Margin="250,0,0,0" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+</ui:FluentWindow>
+

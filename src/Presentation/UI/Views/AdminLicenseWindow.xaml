@@ -1,0 +1,114 @@
+<Window x:Class="OS.Presentation.UI.Views.AdminLicenseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        Title="ClinicOS Admin"
+        Height="720" Width="820"
+        WindowStartupLocation="CenterScreen"
+        Background="#1a1a2e">
+    <Grid Margin="28">
+        <Border Background="#1e1e2e" CornerRadius="10" Padding="28">
+            <StackPanel>
+                <TextBlock x:Name="TitleText"
+                           Text="Administrador de licencias HWID"
+                           Foreground="White"
+                           FontSize="24"
+                           FontWeight="Bold"/>
+                <TextBlock x:Name="PlanText"
+                           Foreground="#8fbfff"
+                           Margin="0,6,0,4"/>
+                <TextBlock Text="Flujo offline: crea el archivo .key y entrégalo manualmente al cliente por USB o red local."
+                           Foreground="#888899"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,18"/>
+
+                <TextBlock Text="HWID del equipo destino"
+                           Foreground="#aaaaaa"
+                           Margin="0,0,0,6"/>
+                <TextBox x:Name="TargetHwidTextBox"
+                         MinHeight="70"
+                         TextWrapping="Wrap"
+                         Margin="0,0,0,14"/>
+
+                <Grid Margin="0,0,0,14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                        <TextBlock Text="Plan"
+                                   Foreground="#aaaaaa"
+                                   Margin="0,0,0,6"/>
+                        <ComboBox x:Name="PlanComboBox" SelectedIndex="0">
+                            <ComboBoxItem Content="1-3 HWID"/>
+                            <ComboBoxItem Content="4-15 HWID"/>
+                            <ComboBoxItem Content="16-40 HWID"/>
+                            <ComboBoxItem Content="Ilimitado HWID"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                        <TextBlock Text="Membresia"
+                                   Foreground="#aaaaaa"
+                                   Margin="0,0,0,6"/>
+                        <ComboBox x:Name="LicenseTypeComboBox" SelectedIndex="0">
+                            <ComboBoxItem Content="Mensual"/>
+                            <ComboBoxItem Content="Anual"/>
+                            <ComboBoxItem Content="Adquisicion"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Mercado"
+                                   Foreground="#aaaaaa"
+                                   Margin="0,0,0,6"/>
+                        <ComboBox x:Name="MarketComboBox" SelectedIndex="0">
+                            <ComboBoxItem Content="MX"/>
+                            <ComboBoxItem Content="USA"/>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="PIN opcional de 4 digitos"
+                           Foreground="#aaaaaa"
+                           Margin="0,0,0,6"/>
+                <TextBox x:Name="PinTextBox"
+                         Text="0000"
+                         MaxLength="4"
+                         Margin="0,0,0,14"/>
+
+                <Grid Margin="0,0,0,18">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="OutputPathTextBox"
+                             IsReadOnly="True"
+                             Margin="0,0,10,0"/>
+                    <ui:Button Grid.Column="1"
+                               Content="Guardar como..."
+                               Click="SelectOutputButton_Click"/>
+                </Grid>
+
+                <ui:Button x:Name="GenerateButton"
+                           Content="Crear archivo .key"
+                           Appearance="Primary"
+                           HorizontalAlignment="Stretch"
+                           Click="GenerateButton_Click"/>
+
+                <TextBlock x:Name="StatusText"
+                           Foreground="#ffb86b"
+                           TextWrapping="Wrap"
+                           Margin="0,18,0,12"/>
+
+                <TextBlock Text="Licencias emitidas"
+                           Foreground="#aaaaaa"
+                           Margin="0,8,0,6"/>
+                <ListBox x:Name="IssuedListBox"
+                         Height="170"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
