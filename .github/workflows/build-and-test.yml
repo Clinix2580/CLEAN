@@ -6,18 +6,25 @@ on:
   pull_request:
     branches: [ main, develop ]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-test:
     runs-on: windows-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        node-version: '24'
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
+      env:
+        FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     
     - name: Restore dependencies
       run: dotnet restore Nuevo_Sistema.sln
@@ -28,9 +35,26 @@ jobs:
     - name: Build solution (Debug with warnings as errors)
       run: dotnet build Nuevo_Sistema.sln --configuration Debug --no-restore --warnaserror
     
-    - name: Run tests (if available)
+    - name: Check for test projects
+      id: check-tests
+      shell: powershell
+      run: |
+        $testProjects = Get-ChildItem -Path tests -Filter "*.csproj" -Recurse -ErrorAction SilentlyContinue
+        if ($testProjects) {
+          Write-Host "Test projects found: $($testProjects.Count)"
+          echo "has_tests=true" >> $env:GITHUB_OUTPUT
+        } else {
+          Write-Host "No test projects found - skipping test execution"
+          echo "has_tests=false" >> $env:GITHUB_OUTPUT
+        }
+
+    - name: Run tests
+      if: steps.check-tests.outputs.has_tests == 'true'
       run: dotnet test tests/**/*.csproj --configuration Release --no-build --verbosity normal
-      continue-on-error: true
+
+    - name: Skip tests notification
+      if: steps.check-tests.outputs.has_tests == 'false'
+      run: echo "No test projects configured. Test execution skipped."
     
     - name: Check for compilation warnings
       shell: powershell
